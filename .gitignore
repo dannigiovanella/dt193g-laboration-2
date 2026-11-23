@@ -1,3 +1,8 @@
+# Installerade paket
 node_modules/
 
+# Miljövariabler och hemliga uppgifter
 .env
+
+# Loggfiler
+*.log
