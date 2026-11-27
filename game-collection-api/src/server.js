@@ -4,6 +4,9 @@
 //Hämtar Fastify
 import Fastify from 'fastify';
 
+//Hämtar anslutningen till databasen
+import pool from './config/database.js';
+
 //Skapar en ny Fastify server
 const fastify = Fastify({
     //Aktiverar loggning av exempelvis inkommande förfrågningar och fel
@@ -18,6 +21,10 @@ fastify.get('/', async function (request, reply) {
 //Funktion som startar servern
 const start = async () => {
     try {
+        //Test för anslutning till databasen
+        await pool.query('SELECT NOW()');
+        //Skriver ut meddelande om anslutning fungerar
+        console.log('Anslutningen till databasen fungerar!');
         //Startar servern på port 3000
         await fastify.listen({ port: 3000 });
 
