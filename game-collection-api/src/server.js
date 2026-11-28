@@ -7,6 +7,9 @@ import Fastify from 'fastify';
 //Hämtar anslutningen till databasen
 import pool from './config/database.js';
 
+//Hämtar routes för spelhantering
+import gameRoutes from './routes/gameRoutes.js';
+
 //Skapar en ny Fastify server
 const fastify = Fastify({
     //Aktiverar loggning av exempelvis inkommande förfrågningar och fel
@@ -25,6 +28,11 @@ const start = async () => {
         await pool.query('SELECT NOW()');
         //Skriver ut meddelande om anslutning fungerar
         console.log('Anslutningen till databasen fungerar!');
+
+        //Registrerar routes i Fastify
+        await fastify.register(gameRoutes);
+
+
         //Startar servern på port 3000
         await fastify.listen({ port: 3000 });
 
