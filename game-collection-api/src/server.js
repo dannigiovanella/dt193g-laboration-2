@@ -1,5 +1,6 @@
 // SERVER
 
+//Importer
 
 //Hämtar Fastify
 import Fastify from 'fastify';
@@ -10,11 +11,15 @@ import pool from './config/database.js';
 //Hämtar routes för spelhantering
 import gameRoutes from './routes/gameRoutes.js';
 
+
+//SERVER
+
 //Skapar en ny Fastify server
 const fastify = Fastify({
     //Aktiverar loggning av exempelvis inkommande förfrågningar och fel
     logger: true
 });
+
 
 //Skapar en första route som skriver ut meddelande i json
 fastify.get('/', async function (request, reply) {
@@ -31,7 +36,6 @@ const start = async () => {
 
         //Registrerar routes i Fastify
         await fastify.register(gameRoutes);
-
 
         //Startar servern på port 3000
         await fastify.listen({ port: 3000 });
